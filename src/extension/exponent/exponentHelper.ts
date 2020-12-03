@@ -9,6 +9,7 @@ import { Package, IPackageInformation } from "../../common/node/package";
 import { ProjectVersionHelper } from "../../common/projectVersionHelper";
 import {OutputChannelLogger} from "../log/OutputChannelLogger";
 import stripJSONComments = require("strip-json-comments");
+import { stripJsonTrailingComma } from "../../common/utils";
 import * as nls from "vscode-nls";
 import { ErrorHelper } from "../../common/error/errorHelper";
 import { InternalErrorCode } from "../../common/error/internalErrorCode";
@@ -319,7 +320,7 @@ var entryPoint = require('${entryPoint}');`;
         const expJsonPath = this.pathToFileInWorkspace(EXP_JSON);
         return this.fs.readFile(expJsonPath)
             .then(content => {
-                return JSON.parse(stripJSONComments(content.toString()));
+                return JSON.parse(stripJsonTrailingComma(stripJSONComments(content.toString())));
             });
     }
 
@@ -327,7 +328,7 @@ var entryPoint = require('${entryPoint}');`;
         const appJsonPath = this.pathToFileInWorkspace(APP_JSON);
         return this.fs.readFile(appJsonPath)
             .then(content => {
-                return JSON.parse(stripJSONComments(content.toString()));
+                return JSON.parse(stripJsonTrailingComma(stripJSONComments(content.toString())));
             });
     }
 

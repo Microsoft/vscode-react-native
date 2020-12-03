@@ -5,6 +5,7 @@ import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
 import stripJsonComments = require("strip-json-comments");
+import { stripJsonTrailingComma } from "../common/utils";
 import { LoggingDebugSession, Logger, logger, ErrorDestination } from "vscode-debugadapter";
 import { DebugProtocol } from "vscode-debugprotocol";
 import { getLoggingDirectory, LogHelper } from "../extension/log/LogHelper";
@@ -198,7 +199,7 @@ export function getProjectRoot(args: any): string {
     const settingsPath = path.resolve(vsCodeRoot, ".vscode/settings.json");
     try {
         let settingsContent = fs.readFileSync(settingsPath, "utf8");
-        settingsContent = stripJsonComments(settingsContent);
+        settingsContent = stripJsonTrailingComma(stripJsonComments(settingsContent));
         let parsedSettings = JSON.parse(settingsContent);
         let projectRootPath = parsedSettings["react-native-tools.projectRoot"] || parsedSettings["react-native-tools"].projectRoot;
         return path.resolve(vsCodeRoot, projectRootPath);

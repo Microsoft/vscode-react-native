@@ -4,6 +4,7 @@
 import * as path from "path";
 import * as fs from "fs";
 import stripJsonComments = require("strip-json-comments");
+import { stripJsonTrailingComma } from "../common/utils";
 
 export interface IConfiguration {
     name: string;
@@ -52,7 +53,7 @@ export class LaunchScenariosManager {
     public readLaunchScenarios(): void {
         if (fs.existsSync(this.pathToLaunchFile)) {
             const content = fs.readFileSync(this.pathToLaunchFile, "utf8");
-            this.launchScenarios = JSON.parse(stripJsonComments(content));
+            this.launchScenarios = JSON.parse(stripJsonTrailingComma(stripJsonComments(content)));
         }
     }
 
