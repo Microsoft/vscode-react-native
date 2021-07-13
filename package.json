@@ -47,6 +47,28 @@
   ],
   "main": "./src/extension/rn-extension",
   "contributes": {
+    "languages": [
+      {
+        "id": "ReactNativeToolsOutput",
+        "extensions": [
+          ".log"
+        ],
+        "mimetypes": [
+          "log",
+          "text/log",
+          "text/x-log",
+          "text/x-code-output",
+          "x-code-output"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ReactNativeToolsOutput",
+        "scopeName": "react-native-tools-output",
+        "path": "./syntaxes/rn-output.tmGrammar.json"
+      }
+    ],
     "commands": [
       {
         "command": "reactNative.launchAndroidSimulator",

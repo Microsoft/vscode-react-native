@@ -1,0 +1,281 @@
+{
+    "scopeName": "react-native-tools-output",
+    "patterns": [
+        {
+            "include": "#executing"
+        },
+        {
+            "include": "#build-succes"
+        },
+        {
+            "include": "#build-failed"
+        },
+        {
+            "include": "#ip-address"
+        },
+        {
+            "include": "#filepath"
+        },
+        {
+            "include": "#numeric-decimal"
+        },
+        {
+            "include": "#string-single-quoted"
+        },
+        {
+            "include": "#string-double-quoted"
+        },
+        {
+            "include": "#email-address"
+        },
+        {
+            "include": "#react-native-tools-timestamp"
+        },
+        {
+            "include": "#date-MM/DD/(YY)YY"
+        },
+        {
+            "include": "#date-(YY)YY/DD/MM"
+        },
+        {
+            "include": "#date-DD/MM/(YY)YY"
+        },
+        {
+            "include": "#date-ISO"
+        },
+        {
+            "include": "#time"
+        },
+        {
+            "include": "#npm-output"
+        },
+        {
+            "include": "#error-tag"
+        },
+        {
+            "include": "#warn-tag"
+        },
+        {
+            "include": "#info-tag"
+        },
+        {
+            "include": "#debug-tag"
+        },
+        {
+            "include": "#react-native-error"
+        },
+        {
+            "include": "#react-native-warn"
+        },
+        {
+            "include": "#react-native-info"
+        },
+        {
+            "include": "#react-native-debug"
+        },
+        {
+            "include": "#react-native-bundle"
+        },
+        {
+            "include": "#android-logcat-error"
+        },
+        {
+            "include": "#android-logcat-warning"
+        },
+        {
+            "include": "#android-logcat-info"
+        },
+        {
+            "include": "#android-logcat-debug"
+        },
+        {
+            "include": "#android-logcat-verbose"
+        },
+        {
+            "include": "#serilog-error"
+        },
+        {
+            "include": "#serilog-warning"
+        },
+        {
+            "include": "#serilog-info"
+        },
+        {
+            "include": "#serilog-debug"
+        },
+        {
+            "include": "#serilog-verbose"
+        },
+        {
+            "include": "#android-logcat-timestamp"
+        },
+        {
+            "include": "#fail"
+        },
+        {
+            "include": "#fail-stack"
+        }
+    ],
+    "repository": {
+        "string-double-quoted": {
+            "match": "\"(.*?)\"",
+            "name": "string.quoted rnt.output.string"
+        },
+        "string-single-quoted": {
+            "match": "'(.*?)'",
+            "name": "string.quoted rnt.output.string"
+        },
+        "email-address": {
+            "match": "/^([a-z0-9_\\.-]+)@([a-z0-9_\\.-]+)\\.([a-z\\.]{2,6})$/",
+            "name": "markup.underline.link rnt.output.url"
+        },
+        "url": {
+            "match": "(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\/\\w \\.-]*)*\/?$/",
+            "name": "markup.underline.link rnt.output.url"
+        },
+        "ip-address": {
+            "match": "(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])(:(6553[0-5]|655[0-2][0-9]\\d|65[0-4](\\d){2}|6[0-4](\\d){3}|[1-5](\\d){4}|[1-9](\\d){0,3}))?",
+            "name": "markup.underline.link rnt.output.url"
+        },
+        "filepath": {
+            "match": "(([a-zA-Z]:)|((\\\\|\/){1,2}\\w+)\\$?)((\\\\|\/)(\\w[\\w ]*.*))+\\.([a-zA-Z0-9]+)",
+            "name": "markup.underline.link rnt.output.url"
+        },
+        "android-logcat-timestamp": {
+            "match": "\\d{2}-\\d{2}\\s\\d{1,2}:\\d{1,2}:\\d{2}(:\\d{2}([.,]\\d{1,})?)?(Z| ?[+-]\\d{1,2}:\\d{2})?(.\\d{3})?",
+            "name": "constant.numeric rnt.output.timestamp"
+        },
+        "react-native-tools-timestamp": {
+            "match": "\\[(?i)(([Ss]un(day)?|[Mm]on(day)?|[Tt]ue(sday)?|[Ww]ed(nesday)?|[Tt]hu(rsday)?|[Ff]ri(day)?|[Ss]at(urday)?)?\\s)?(([Jj]an(uary)?|[Ff]eb(ruary)?|[Mm]ar(ch)?|[Aa]pr(il)?|[Mm]ay|[Jj]un(e)?|[Jj]ul(y)?|[Aa]ug(ust)?|[Ss]ep(tember)?|[Oo]ct(ober)?|[Nn]ov(ember)?|[Dd]ec(ember)?)\\s)+((0?[1-9]|[1-2][0-9]|3[0-1])?\\s)+([1-2][0-9][0-9][0-9]).*\\]",
+            "name": "constant.numeric rnt.output.timestamp"
+        },
+        "date-MM/DD/(YY)YY": {
+            "match": "\\b(((0|1)?[0-9][1-2]?)|(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sept(ember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?))[/|\\-|\\.| ]([0-2]?[0-9]|[3][0-1])[/|\\-|\\.| ]((19|20)?[0-9]{2})\\b",
+            "name": "constant.numeric rnt.output.timestamp"
+        },
+        "date-(YY)YY/DD/MM": {
+            "match": "\\b((19|20)?[0-9]{2}[/|\\-|\\.| ](((0|1)?[0-9][1-2]?)|(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sept(ember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?))[/|\\-|\\.| ]([0-2]?[0-9]|[3][0-1]))\\b",
+            "name": "constant.numeric rnt.output.timestamp"
+        },
+        "date-DD/MM/(YY)YY": {
+            "match": "\\b([0-2]?[0-9]|[3][0-1])[/|\\-|\\.| ](((0|1)?[0-9][1-2]?)|(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sept(ember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?))[/|\\-|\\.| ]((19|20)?[0-9]{2})\\b",
+            "name": "constant.numeric rnt.output.timestamp"
+        },
+        "date-ISO": {
+            "match": "\\b\\d{4}-\\d{2}-\\d{2}(T|\\b)",
+            "name": "constant.numeric rnt.output.timestamp"
+        },
+        "time": {
+            "match": "\\d{1,2}:\\d{1,2}:\\d{2}(:\\d{2}([.,]\\d{1,})?)?(Z| ?[+-]\\d{1,2}:\\d{2})?(.\\d{3})?",
+            "name": "constant.numeric rnt.output.timestamp"
+        },
+        "numeric-decimal": {
+            "match": "\\b\\d+(\\.\\d+)?\\b",
+            "name": "constant.numeric rnt.output.numeric"
+        },
+        "npm-output": {
+            "match": "(-)+>|├(─)+|└(─)+",
+            "name": "comment.line rnt.output.process"
+        },
+        "error-tag": {
+            "match": "\\[(Down|Error|Failure|Fail|Fatal|DOWN|ERROR|FAILURE|FAIL|FATAL)\\]",
+            "name": "markup.bold invalid.illegal rnt.output.error"
+        },
+        "warn-tag": {
+            "match": "\\[(warning|warn|Warning|Warn|WARNING|WARN)\\]",
+            "name": "markup.bold markup.deleted rnt.output.warn"
+        },
+        "info-tag": {
+            "match": "\\[(hint|info|information|true|log|Hint|Info|Information|Log|HINT|INFO|INFORMATION|LOG)\\]",
+            "name": "markup.bold markup.inserted rnt.output.info"
+        },
+        "debug-tag": {
+            "match": "\\[(debug|Debug|DEBUG)\\]",
+            "name": "markup.bold markup.changed rnt.output.debug"
+        },
+        "react-native-error": {
+            "match": "\\s(DOWN|ERROR|FAILURE|FAIL|FATAL)\\b.*$",
+            "name": "markup.bold invalid.illegal rnt.output.error"
+        },
+        "react-native-warn": {
+            "match": "\\s(WARNING|WARN)\\b",
+            "name": "markup.bold markup.deleted rnt.output.warn"
+        },
+        "react-native-info": {
+            "match": "\\s(HINT|INFO|INFORMATION|LOG)\\b",
+            "name": "markup.bold markup.inserted rnt.output.info"
+        },
+        "react-native-debug": {
+            "match": "\\sDEBUG\\b",
+            "name": "markup.bold markup.changed rnt.output.debug"
+        },
+        "react-native-bundle": {
+            "match": "\\sBUNDLE\\b",
+            "name": "markup.bold rnt.output.process"
+        },
+        "constants": {
+            "match": "\\b(true|false|null|undefined|NaN)\\b",
+            "name": "constant.language rnt.output.constant"
+        },
+        "fail": {
+            "match": "\\b(Exception|Error|Failure|Fail|EXCEPTION|ERROR|FAILURE|FAIL):?\\b.*$",
+            "name": "invalid rnt.output.error"
+        },
+        "fail-stack": {
+            "match": "^[\\t ]*at.+$",
+            "name": "invalid rnt.output.error"
+        },
+        "android-logcat-error": {
+            "match": "\\sE\\s[a-zA-Z]+:\\s.*$",
+            "name": "invalid rnt.output.error"
+        },
+        "android-logcat-warning": {
+            "match": "\\sW\\s[a-zA-Z]+:\\s",
+            "name": "markup.bold markup.deleted rnt.output.warn"
+        },
+        "android-logcat-info": {
+            "match": "\\sI\\s[a-zA-Z]+:\\s",
+            "name": "markup.bold markup.inserted rnt.output.info"
+        },
+        "android-logcat-debug": {
+            "match": "\\sD\\s[a-zA-Z]+:\\s",
+            "name": "markup.bold markup.changed rnt.output.debug"
+        },
+        "android-logcat-verbose": {
+            "match": "\\sV\\s[a-zA-Z]+:\\s",
+            "name": "markup.bold comment rnt.output.verbose"
+        },
+        "serilog-error": {
+            "match": "^(?i)([a-zA-Z]*\\s+)?(error|eror|err|er|e|fatal|fatl|ftl)\\b",
+            "name": "markup.bold invalid rnt.output.error"
+        },
+        "serilog-warning": {
+            "match": "^(?i)([a-zA-Z]*\\s+)?[Ww](arning|arn|rn)\\b",
+            "name": "markup.bold markup.deleted rnt.output.warn"
+        },
+        "serilog-info": {
+            "match": "^(?i)([a-zA-Z]*\\s+)?([Ii](nformation|nfo|nf)|In)\\b",
+            "name": "markup.bold markup.inserted rnt.output.info"
+        },
+        "serilog-debug": {
+            "match": "^(?i)[Dd](ebug|bug|bg)\\b",
+            "name": "markup.bold markup.changed rnt.output.debug"
+        },
+        "serilog-verbose": {
+            "match": "^(?i)([a-zA-Z]*\\s+)?[Vv](erbose|erb|rb)\\b",
+            "name": "markup.bold comment rnt.output.verbose"
+        },
+        "executing": {
+            "match": "^\\s*((>+)|([Ee]xec(ute)?)|([Ee]xport)|([Tt]ask))\\s.*$",
+            "name": "markup.inserted rnt.output.process"
+        },
+        "build-succes": {
+            "match": "^.*BUILD SUCCE(EDED|SSFULL?).*$",
+            "name": "markup.bold rnt.output.success"
+        },
+        "build-failed": {
+            "match": "^.*BUILD FAILED.*$",
+            "name": "markup.bold invalid rnt.output.error"
+        }
+    }
+}
