@@ -31,7 +31,7 @@ export const ERROR_STRINGS = {
     ),
     [InternalErrorCode.IOSDeployNotFound]: localize(
         "IOSDeployNotFound",
-        "Unable to find ios-deploy. Please make sure to install it globally('npm install -g ios-deploy')",
+        "Unable to find ios-deploy. Please make sure to install it globally('brew install ios-deploy')",
     ),
     [InternalErrorCode.DeviceNotPluggedIn]: localize(
         "DeviceNotPluggedIn",
