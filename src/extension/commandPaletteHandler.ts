@@ -42,6 +42,7 @@ import { InspectorViewFactory } from "./networkInspector/views/inspectorViewFact
 import { WindowsPlatform } from "./windows/windowsPlatform";
 import { CONTEXT_VARIABLES_NAMES } from "../common/contextVariablesNames";
 import { MacOSPlatform } from "./macos/macOSPlatform";
+import { TipNotificationService } from "../extension/tipsNotificationsService/tipsNotificationService";
 nls.config({
     messageFormat: nls.MessageFormat.bundle,
     bundleFormat: nls.BundleFormat.standalone,
@@ -311,6 +312,7 @@ export class CommandPaletteHandler {
     }
 
     public static runWindows(): Promise<void> {
+        TipNotificationService.getInstance().setKnownDateForFeatureById("debuggingRNWAndMacOSApps");
         const additionalPackagesToCheck: ParsedPackage[] = [
             REACT_NATIVE_PACKAGES.REACT_NATIVE_WINDOWS,
         ];
@@ -343,6 +345,7 @@ export class CommandPaletteHandler {
     }
 
     public static runMacOS(): Promise<void> {
+        TipNotificationService.getInstance().setKnownDateForFeatureById("debuggingRNWAndMacOSApps");
         const additionalPackagesToCheck: ParsedPackage[] = [
             REACT_NATIVE_PACKAGES.REACT_NATIVE_MACOS,
         ];
@@ -455,6 +458,8 @@ export class CommandPaletteHandler {
     }
 
     public static runElementInspector(): Promise<void> {
+        TipNotificationService.getInstance().setKnownDateForFeatureById("elementInspector");
+
         if (!CommandPaletteHandler.elementInspector) {
             // Remove the following env variables to prevent running electron app in node mode.
             // https://github.com/microsoft/vscode/issues/3011#issuecomment-184577502
@@ -576,6 +581,7 @@ export class CommandPaletteHandler {
     }
 
     public static startLogCatMonitor(): Promise<void> {
+        TipNotificationService.getInstance().setKnownDateForFeatureById("logCatMonitor");
         return this.selectProject().then(appLauncher => {
             const projectPath = appLauncher.getPackager().getProjectPath();
             const nodeModulesRoot: string = appLauncher.getOrUpdateNodeModulesRoot();

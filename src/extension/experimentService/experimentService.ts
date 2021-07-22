@@ -1,13 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for details.
 
-import * as https from "https";
 import * as vscode from "vscode";
 import { IExperiment } from "./IExperiment";
-import { PromiseUtil } from "../../common/node/promise";
 import { TelemetryHelper } from "../../common/telemetryHelper";
 import { Telemetry } from "../../common/telemetry";
 import { ExtensionConfigManager } from "../extensionConfigManager";
+import { IConfig, retryDownloadConfig } from "../remoteConfigHelper";
 
 export enum ExperimentStatuses {
     ENABLED = "enabled",
@@ -15,7 +14,7 @@ export enum ExperimentStatuses {
     FAILED = "failed",
 }
 
-export interface ExperimentConfig {
+export interface ExperimentConfig extends IConfig {
     experimentName: string;
     popCoveragePercent: number;
     enabled: boolean;
@@ -73,7 +72,10 @@ export class ExperimentService implements vscode.Disposable {
         this.cancellationTokenSource = new vscode.CancellationTokenSource();
         this.downloadedExperimentsConfig = null;
 
-        this.downloadConfigRequest = this.retryDownloadExperimentsConfig();
+        this.downloadConfigRequest = retryDownloadConfig<ExperimentConfig[]>(
+            this.endpointURL,
+            this.cancellationTokenSource,
+        );
     }
 
     private async executeExperiment(expConfig: ExperimentConfig): Promise<ExperimentResult> {
@@ -105,19 +107,6 @@ export class ExperimentService implements vscode.Disposable {
         return expResult;
     }
 
-    private async retryDownloadExperimentsConfig(retryCount = 60): Promise<ExperimentConfig[]> {
-        try {
-            return await this.downloadExperimentsConfig();
-        } catch (err) {
-            if (retryCount < 1 || this.cancellationTokenSource.token.isCancellationRequested) {
-                throw err;
-            }
-
-            await PromiseUtil.delay(2000);
-            return await this.retryDownloadExperimentsConfig(--retryCount);
-        }
-    }
-
     private async initializeExperimentsInstances(): Promise<Map<string, IExperiment>> {
         let expInstances = new Map<string, IExperiment>();
 
@@ -133,26 +122,6 @@ export class ExperimentService implements vscode.Disposable {
         }
 
         return expInstances;
-    }
-
-    private downloadExperimentsConfig(): Promise<ExperimentConfig[]> {
-        return new Promise<ExperimentConfig[]>((resolve, reject) => {
-            https
-                .get(this.endpointURL, response => {
-                    let data = "";
-                    response.setEncoding("utf8");
-                    response.on("data", (chunk: string) => (data += chunk));
-                    response.on("end", () => {
-                        try {
-                            resolve(JSON.parse(data));
-                        } catch (err) {
-                            reject(err);
-                        }
-                    });
-                    response.on("error", reject);
-                })
-                .on("error", reject);
-        });
     }
 
     private sendExperimentTelemetry(experimentsResults: ExperimentResult[]): void {

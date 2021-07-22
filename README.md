@@ -52,6 +52,7 @@ Using this extension, you can **debug your code and quickly run `react-native` c
   - [Change project root](#change-project-root)
   - [Configure an Android LogCat Monitor](#configure-an-android-logcat-monitor)
   - [Configure dependencies versions for debugging Expo projects](#configure-dependencies-versions-for-debugging-expo-projects)
+  - [Configure custom key bindings for extension commands](#configure-custom-key-bindings-for-extension-commands)
 - [Network Inspector](#network-inspector)
 - [Developing inside a Docker Container](#developing-inside-a-docker-container)
 - [Contributing](#contributing)
@@ -707,6 +708,17 @@ To debug Expo applications the extension requires additional dependencies, such 
 
 To enable new versions of the dependencies, it's required to restart VS Code editor. After that the extension will download the new versions of the packages on the next Expo debugging starting.
 
+## Configure custom key bindings for extension commands
+
+The extension provides context variables for the following features:
+|Context variable|Feature|
+|---|---|
+|`isRNPackagerRunning` - true if the packager is running|Metro packager|
+|`isRNTNetworkInspectorRunning` - true if the Network inspector is running|Network inspector|
+
+Using these context variables you can assign the same keyboard combination for some pair commands for more convenient use. For example, you can configure the same key bindings for `Start Packager` and `Stop Packager` commands using `when` clauses, as shown below:
+![image](images/custom-keybindings.png)
+
 # Network Inspector
 
 The extension provides `Network inspector` feature to inspect outgoing network traffic in your apps. You can browse all requests being made and their responses in VS Code DevTools console.
@@ -730,6 +742,16 @@ Before using the Network inspector, please make sure that your system meets the 
 - To stop the Network inspector you can use `Stop Network Inspector` Command Palette command
 
 For now the Network inspector doesn't support Expo applications.
+
+### Network inspector logs theme
+
+The extension provides “Dark” and “Light” color themes for Network Inspector logs. You can configure the theme in the extension configuration in the Settings tab or in `settings.json` file.
+
+```json
+{
+  "react-native-tools.networkInspector.consoleLogsColorTheme": "Dark"
+}
+```
 
 # Developing inside a Docker Container
 
